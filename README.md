@@ -9,4 +9,4 @@
 9.*_override.tf.json Игнорируются файлы имеющие в имени _override.tf.json
 10..terraformrc Игнорируются все файлы с именем .terraformrc
 11.terraform.rc Игнорируются файлы с именем terraform.rc
-
+NEW LINE
