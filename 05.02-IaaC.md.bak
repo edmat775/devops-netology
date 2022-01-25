@@ -41,8 +41,4 @@
     Vagrant
     Ansible
 Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.
-Установил VirtualBox
-Установил Vagrant
-PS C:\vm> vagrant -v
-Vagrant 2.2.19
 
