@@ -61,3 +61,42 @@ MongoDB, как основное хранилище данных для java-п�
 Зависит от нагрузки на DB. Если нагрузка большая, то физический сервер, если нет – VM.
 Gitlab сервер для реализации CI/CD процессов и приватный (закрытый) Docker Registry.
 Подойдет VM для DB и фалового хранилища, Docker для сервисов
+
+
+Задача 3
+Запустите первый контейнер из образа centos c любым тэгом в фоновом режиме, подключив папку /data из текущей рабочей директории на хостовой машине в /data контейнера;
+Запустите второй контейнер из образа debian в фоновом режиме, подключив папку /data из текущей рабочей директории на хостовой машине в /data контейнера;
+Подключитесь к первому контейнеру с помощью docker exec и создайте текстовый файл любого содержания в /data;
+Добавьте еще один файл в папку /data на хостовой машине;
+Подключитесь во второй контейнер и отобразите листинг и содержание файлов в /data контейнера.
+
+
+vagrant@server1:~$ docker run -it --rm -d --name centos -v $(pwd)/data:/data centos:latest
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+a1d0c7532777: Pull complete 
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image for centos:latest
+997900fd580e117e834544b76cd94f9a1bb009ff5d62a7ebd43d778ad2764944
+
+vagrant@server1:~$ docker run -it --rm -d --name debian -v $(pwd)/data:/data debian:latest
+Unable to find image 'debian:latest' locally
+latest: Pulling from library/debian
+0c6b8ff8c37e: Pull complete 
+Digest: sha256:fb45fd4e25abe55a656ca69a7bef70e62099b8bb42a279a5e0ea4ae1ab410e0d
+Status: Downloaded newer image for debian:latest
+31a7d6e696bc08acab71b0c7a7c497f74185e6b69b34928ce5a6740da8d2dd84
+
+
+vagrant@server1:~$ docker exec -it centos bash
+[root@997900fd580e /]# echo "31 January 2022 centos" >> /data/centos.txt
+[root@997900fd580e /]# exit
+exit
+vagrant@server1:~$ sudo su
+root@server1:/home/vagrant# echo "31 January 2022 host" >> data/host.txt
+root@server1:/home/vagrant# exit
+exit
+vagrant@server1:~$ docker exec -it debian bash
+root@31a7d6e696bc:/# ls data/
+centos.txt  host.txt
+root@31a7d6e696bc:/# 
