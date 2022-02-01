@@ -1,1 +1,1 @@
-# devops-netology
+### [Домашнее задание к занятию "5.4. Оркестрация группой Docker контейнеров на примере Docker Compose"](https://github.com/)
